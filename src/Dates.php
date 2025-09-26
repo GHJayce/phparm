@@ -1,6 +1,6 @@
 <?php
 
-namespace GHBJayce\Weapons;
+namespace GHJayce\Weapons;
 
 /**
  * Class Dates
@@ -86,7 +86,7 @@ class Dates
      */
     public static function toStamp($datetime)
     {
-        return is_numeric($datetime) ? (int) $datetime : strtotime($datetime);
+        return is_numeric($datetime) ? (int)$datetime : strtotime($datetime);
     }
 
     /**
@@ -108,7 +108,7 @@ class Dates
      */
     public static function toCommonFormat($datetime = null)
     {
-        return empty($datetime) ? date('Y-m-d H:i:s', $datetime) : is_string($datetime) ? $datetime : date('Y-m-d H:i:s', $datetime);
+        return empty($datetime) ? date('Y-m-d H:i:s', $datetime) : (is_string($datetime) ? $datetime : date('Y-m-d H:i:s', $datetime));
     }
 
     /**

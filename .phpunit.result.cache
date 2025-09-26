@@ -1,0 +1,1 @@
+{"version":1,"defects":{"tests\\AttributeTest::testAtr":4},"times":{"tests\\ArrTest::testGroup":0.005,"tests\\ArrTest::testToOneDimension":0,"tests\\AttributeTest::testAtr":0.002,"tests\\DatesTest::testDuration":0,"tests\\DatesTest::testToReadable":0,"tests\\DatesTest::testToDateFormat":0,"tests\\DatesTest::testToCommonFormat":0}}

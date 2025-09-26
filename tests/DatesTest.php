@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class DatesTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('PRC');
     }

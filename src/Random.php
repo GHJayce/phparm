@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GHBJayce\Weapons;
+namespace GHJayce\Weapons;
 
 /**
  * Class Random

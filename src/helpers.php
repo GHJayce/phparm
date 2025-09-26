@@ -1,7 +1,7 @@
 <?php
 
-use GHBJayce\Weapons\Arr;
-use GHBJayce\Weapons\Dates;
+use GHJayce\Weapons\Arr;
+use GHJayce\Weapons\Dates;
 
 if (!function_exists('array_group')) {
     function array_group(array $array, $key_or_func)

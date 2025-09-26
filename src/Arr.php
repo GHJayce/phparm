@@ -1,6 +1,6 @@
 <?php
 
-namespace GHBJayce\Weapons;
+namespace GHJayce\Weapons;
 
 class Arr
 {

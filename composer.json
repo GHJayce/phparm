@@ -1,25 +1,26 @@
 {
-  "version": "0.0.3",
-  "name": "ghbjayce/weapons",
+  "version": "1.0.0",
+  "name": "ghjayce/weapons",
   "description": "There's always the PHP weapons you want.",
   "require-dev": {
     "symfony/var-dumper": "^4.2",
-    "phpunit/phpunit": "^7.5"
+    "phpunit/phpunit": "^8.0"
   },
   "license": "MIT",
   "authors": [
     {
-      "name": "GHBJayce",
+      "name": "GHJayce",
       "email": "jaycedeng@outlook.com"
     }
   ],
-  "require": {},
+  "require": {
+  },
   "autoload": {
     "files": [
       "src/helpers.php"
     ],
     "psr-4": {
-      "GHBJayce\\Weapons\\": "src/"
+      "GHJayce\\Weapons\\": "src/"
     }
   }
 }
