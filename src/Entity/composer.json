@@ -1,0 +1,11 @@
+{
+  "name": "ghjayce/weapon-entity",
+  "require": {
+    "php": "^7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "GHJayce\\Weapon\\Entity\\": "src/"
+    }
+  }
+}

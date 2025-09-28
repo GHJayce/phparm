@@ -1,26 +1,32 @@
 {
-  "version": "1.0.0",
-  "name": "ghjayce/weapons",
-  "description": "There's always the PHP weapons you want.",
-  "require-dev": {
-    "symfony/var-dumper": "^4.2",
-    "phpunit/phpunit": "^8.0"
-  },
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "GHJayce",
-      "email": "jaycedeng@outlook.com"
-    }
-  ],
-  "require": {
-  },
-  "autoload": {
-    "files": [
-      "src/helpers.php"
+    "name": "ghjayce/weapon",
+    "description": "There's always the PHP weapons you want.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "GHJayce",
+            "email": "jaycedeng@outlook.com"
+        }
     ],
-    "psr-4": {
-      "GHJayce\\Weapons\\": "src/"
-    }
-  }
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "symfony/var-dumper": "^4.2",
+        "symplify/monorepo-builder": "^11.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "GHJayce\\Weapon\\Entity\\": "src/Entity/src/",
+            "GHJayce\\Weapons\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "replace": {
+        "ghjayce/weapon-entity": "self.version"
+    },
+    "version": "1.0.0"
 }

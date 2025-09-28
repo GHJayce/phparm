@@ -33,6 +33,7 @@ class Attribute implements \IteratorAggregate
 
     public function __call($methodName, array $args = [])
     {
+        var_dump([6567567, $this->getIterator()->offsetExists('b'), $this->getIterator()->getFlags()]);
         $offset = 0;
         $length = 3;
         $action = substr($methodName, $offset, $length);
@@ -50,5 +51,16 @@ class Attribute implements \IteratorAggregate
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this);
+    }
+
+    public function toArray()
+    {
+        $result = [];
+        //var_dump([877754, $this->getIterator(), $this->a]);
+        foreach ($this->getIterator() as $field => $value) {
+            //var_dump([768678, $field, $value]);
+            $result[$field] = $value;
+        }
+        return $result;
     }
 }
