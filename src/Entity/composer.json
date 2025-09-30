@@ -1,7 +1,8 @@
 {
   "name": "ghjayce/weapon-entity",
   "require": {
-    "php": "^7.2"
+    "php": "^8.0",
+    "illuminate/contracts": "^8.83"
   },
   "autoload": {
     "psr-4": {

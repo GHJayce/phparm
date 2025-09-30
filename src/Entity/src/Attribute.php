@@ -1,23 +1,16 @@
 <?php
 
-declare(strict_types=1);
+namespace GHJayce\Weapon\Entity;
 
-namespace GHJayce\Weapons\Entity;
-
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 use Traversable;
 
-class Attribute implements \IteratorAggregate
+class Attribute implements \IteratorAggregate, Arrayable, Jsonable
 {
-    protected array $data = [];
-
     public static function make(): static
     {
         return new static;
-    }
-
-    public function get(string $var)
-    {
-        return $this->data[$var] ?? null;
     }
 
     public function fillProperty(array $properties): self
@@ -31,21 +24,45 @@ class Attribute implements \IteratorAggregate
         return $this;
     }
 
-    public function __call($methodName, array $args = [])
+    protected function prefixActionMap(string $action): ?callable
     {
-        var_dump([6567567, $this->getIterator()->offsetExists('b'), $this->getIterator()->getFlags()]);
-        $offset = 0;
-        $length = 3;
-        $action = substr($methodName, $offset, $length);
-        $attribute = lcfirst(substr($methodName, $length + $offset));
-        switch ($action) {
-            case 'get':
-                return $this->$attribute ?? null;
-            case 'set':
-                $this->$attribute = $args[0];
-                return $this;
+        return match ($action) {
+            'get' => [$this, 'prefixActionGet'],
+            'set' => [$this, 'prefixActionSet'],
+            default => null,
+        };
+    }
+
+    protected function prefixActionGet(string $attribute, string $methodName, array $args = []): mixed
+    {
+        $iterator = $this->getIterator();
+        if (!$iterator->offsetExists($attribute)) {
+            return null;
         }
-        throw new \Exception("unknown method name: {$methodName}");
+        return $this->$attribute;
+    }
+
+    protected function prefixActionSet(string $attribute, string $methodName, array $args = []): static
+    {
+        $iterator = $this->getIterator();
+        if (!$iterator->offsetExists($attribute)) {
+            throw new \BadMethodCallException(sprintf('Property "%s" is not public or is not defined.', $attribute));
+        }
+        $this->$attribute = $args[0];
+        return $this;
+    }
+
+    public function __call(string $methodName, array $args = []): mixed
+    {
+        $offset    = 0;
+        $length    = 3;
+        $action    = substr($methodName, $offset, $length);
+        $attribute = lcfirst(substr($methodName, $length + $offset));
+        $callable  = $this->prefixActionMap($action);
+        if ($callable && is_callable($callable)) {
+            return call_user_func($callable, $attribute, $methodName, $args);
+        }
+        throw new \BadMethodCallException('Unsupported operation');
     }
 
     public function getIterator(): \ArrayIterator
@@ -53,14 +70,18 @@ class Attribute implements \IteratorAggregate
         return new \ArrayIterator($this);
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $result = [];
-        //var_dump([877754, $this->getIterator(), $this->a]);
         foreach ($this->getIterator() as $field => $value) {
-            //var_dump([768678, $field, $value]);
             $result[$field] = $value;
         }
         return $result;
+    }
+
+    public function toJson($options = 0): string
+    {
+        $result = $this->toArray();
+        return json_encode($result, $options);
     }
 }
