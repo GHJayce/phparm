@@ -6,7 +6,18 @@
   },
   "autoload": {
     "psr-4": {
-      "GHJayce\\Weapon\\Entity\\": "src/"
+      "Ghjayce\\Weapon\\Entity\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GhjayceTest\\Weapon\\Entity\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6"
+  },
+  "scripts": {
+    "test": ["phpunit"]
   }
 }

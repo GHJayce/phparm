@@ -1,39 +1,64 @@
 <?php
 
-namespace GHJayce\Weapon\Entity;
+namespace Ghjayce\Weapon\Entity;
 
+use Ghjayce\Weapon\Entity\Traits\PrefixMethod;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
-use Traversable;
 
 class Attribute implements \IteratorAggregate, Arrayable, Jsonable
 {
-    public static function make(): static
+    use PrefixMethod;
+
+    public function __construct(array $attributes = [], array $options = [])
     {
-        return new static;
+        $this->fill($attributes, $options);
     }
 
-    public function fillProperty(array $properties): self
+    public function __call(string $methodName, array $args = []): mixed
     {
-        foreach ($properties as $property => $value) {
-            if (!is_string($property) || !property_exists($this, $property)) {
+        $prefixResult = $this->prefixMethod($methodName, $args);
+        if ($prefixResult && is_array($prefixResult)) {
+            return call_user_func(...$prefixResult);
+        }
+        throw new \BadMethodCallException('Unsupported operation');
+    }
+
+    public static function make(array $attributes = [], array $options = []): static
+    {
+        return new static($attributes, $options);
+    }
+
+    public function fill(array $attributes, array $options = []): static
+    {
+        if (!$attributes) {
+            return $this;
+        }
+        $iterator = $this->getIterator();
+        foreach ($attributes as $attribute => $value) {
+            if (
+                (
+                    !is_string($attribute)
+                    && !is_int($attribute)
+                )
+                || !$iterator->offsetExists($attribute)
+            ) {
                 continue;
             }
-            $this->$property = $value ?? null;
+            $this->$attribute = $value;
         }
         return $this;
     }
 
-    protected function prefixActionMap(string $action): ?callable
+    protected function prefixMethodMap(): array
     {
-        return match ($action) {
-            'get' => [$this, 'prefixActionGet'],
-            'set' => [$this, 'prefixActionSet'],
-            default => null,
-        };
+        return [
+            'get' => [$this, 'prefixMethodGet'],
+            'set' => [$this, 'prefixMethodSet'],
+        ];
     }
 
-    protected function prefixActionGet(string $attribute, string $methodName, array $args = []): mixed
+    protected function prefixMethodGet(string $attribute, array $args = [], array $options = []): mixed
     {
         $iterator = $this->getIterator();
         if (!$iterator->offsetExists($attribute)) {
@@ -42,7 +67,7 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable
         return $this->$attribute;
     }
 
-    protected function prefixActionSet(string $attribute, string $methodName, array $args = []): static
+    protected function prefixMethodSet(string $attribute, array $args = [], array $options = []): static
     {
         $iterator = $this->getIterator();
         if (!$iterator->offsetExists($attribute)) {
@@ -52,25 +77,12 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable
         return $this;
     }
 
-    public function __call(string $methodName, array $args = []): mixed
-    {
-        $offset    = 0;
-        $length    = 3;
-        $action    = substr($methodName, $offset, $length);
-        $attribute = lcfirst(substr($methodName, $length + $offset));
-        $callable  = $this->prefixActionMap($action);
-        if ($callable && is_callable($callable)) {
-            return call_user_func($callable, $attribute, $methodName, $args);
-        }
-        throw new \BadMethodCallException('Unsupported operation');
-    }
-
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this);
     }
 
-    public function toArray(): array
+    public function all(): array
     {
         $result = [];
         foreach ($this->getIterator() as $field => $value) {
@@ -79,9 +91,32 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable
         return $result;
     }
 
-    public function toJson($options = 0): string
+    public function toArray(): array
     {
-        $result = $this->toArray();
+        $result = [];
+        foreach ($this->getIterator() as $field => $value) {
+            $finalValue = $value;
+            if ($value instanceof Arrayable) {
+                $finalValue = $value->toArray();
+            }
+            $result[$field] = $finalValue;
+        }
+        return $result;
+    }
+
+    public function toJson($options = JSON_THROW_ON_ERROR): string
+    {
+        $result = [];
+        foreach ($this->getIterator() as $field => $value) {
+            $finalValue = $value;
+            if ($value instanceof Jsonable) {
+                $finalValue = $value->toJson();
+                if ($value instanceof Arrayable) {
+                    $finalValue = $value->toArray();
+                }
+            }
+            $result[$field] = $finalValue;
+        }
         return json_encode($result, $options);
     }
 }

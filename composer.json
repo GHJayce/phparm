@@ -2,31 +2,43 @@
     "name": "ghjayce/weapon",
     "description": "There's always the PHP weapons you want.",
     "license": "MIT",
+    "type": "library",
+    "keywords": ["php", "utility", "utilities", "utils", "utility-library", "utility-function"],
+    "homepage": "https://github.com/GHJayce/weapon",
     "authors": [
         {
             "name": "GHJayce",
-            "email": "jaycedeng@outlook.com"
+            "email": "jaycedeng@outlook.com",
+            "homepage": "https://github.com/GHJayce",
+            "role": "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/GHJayce/weapon/issues",
+        "docs": "https://ghjayce.github.io/weapon"
+    },
     "require": {
-        "php": "^7.2"
+        "illuminate/contracts": "^8.83",
+        "php": "^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0",
-        "symfony/var-dumper": "^4.2",
+        "phpunit/phpunit": "^9.6",
         "symplify/monorepo-builder": "^11.2"
     },
     "autoload": {
         "psr-4": {
-            "GHJayce\\Weapon\\Entity\\": "src/Entity/src/",
-            "GHJayce\\Weapons\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+            "Ghjayce\\Weapon\\Entity\\": "src/Entity/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GhjayceTest\\Weapon\\Entity\\": "src/Entity/tests/"
+        }
     },
     "replace": {
         "ghjayce/weapon-entity": "self.version"
     },
-    "version": "1.0.0"
+    "scripts": {
+        "test": ["phpunit"]
+    }
 }
