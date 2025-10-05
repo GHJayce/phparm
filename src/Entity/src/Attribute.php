@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Ghjayce\Weapon\Entity;
 
 use Ghjayce\Weapon\Entity\Traits\PrefixMethod;
