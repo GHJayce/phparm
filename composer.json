@@ -1,6 +1,6 @@
 {
     "name": "ghjayce/weapon",
-    "description": "There's always the PHP weapons you want.",
+    "description": "PHP arsenal.",
     "license": "MIT",
     "type": "library",
     "keywords": ["php", "utility", "utilities", "utils", "utility-library", "utility-function"],
