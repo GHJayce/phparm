@@ -16,7 +16,7 @@ dotenv.config()
 const env = process.env.ENV || 'prod'
 
 export default defineConfig({
-  base: env === 'prod' ? '/weapon' : '',
+  base: env === 'prod' ? '/'.constConfig.name : '',
   // srcDir: './src',
   title: 'PHPArm',
 
