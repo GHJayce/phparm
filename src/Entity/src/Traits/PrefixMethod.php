@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Ghjayce\Weapon\Entity\Traits;
+namespace Ghjayce\Phparm\Entity\Traits;
 
 trait PrefixMethod
 {

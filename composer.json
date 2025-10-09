@@ -1,10 +1,16 @@
 {
-    "name": "ghjayce/weapon",
+    "name": "ghjayce/phparm",
     "description": "PHP arsenal.",
     "license": "MIT",
     "type": "library",
-    "keywords": ["php", "utility", "utilities", "utils", "utility-library", "utility-function"],
-    "homepage": "https://github.com/GHJayce/weapon",
+    "keywords": [
+        "php",
+        "utility",
+        "utilities",
+        "utils",
+        "utility-library",
+        "utility-function"
+    ],
     "authors": [
         {
             "name": "GHJayce",
@@ -13,9 +19,10 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/GHJayce/phparm",
     "support": {
-        "issues": "https://github.com/GHJayce/weapon/issues",
-        "docs": "https://ghjayce.github.io/weapon"
+        "issues": "https://github.com/GHJayce/phparm/issues",
+        "docs": "https://ghjayce.github.io/phparm"
     },
     "require": {
         "illuminate/contracts": "^8.83",
@@ -27,18 +34,20 @@
     },
     "autoload": {
         "psr-4": {
-            "Ghjayce\\Weapon\\Entity\\": "src/Entity/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "GhjayceTest\\Weapon\\Entity\\": "src/Entity/tests/"
+            "Ghjayce\\Phparm\\Entity\\": "src/Entity/src/"
         }
     },
     "replace": {
-        "ghjayce/weapon-entity": "self.version"
+        "ghjayce/phparm-entity": "self.version"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GhjayceTest\\Phparm\\Entity\\": "src/Entity/tests/"
+        }
     },
     "scripts": {
-        "test": ["phpunit"]
+        "test": [
+            "phpunit"
+        ]
     }
 }

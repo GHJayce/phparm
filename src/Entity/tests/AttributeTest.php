@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Weapon\Entity;
+namespace GhjayceTest\Phparm\Entity;
 
 use PHPUnit\Framework\TestCase;
 

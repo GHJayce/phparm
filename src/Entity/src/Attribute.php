@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Ghjayce\Weapon\Entity;
+namespace Ghjayce\Phparm\Entity;
 
-use Ghjayce\Weapon\Entity\Traits\PrefixMethod;
+use Ghjayce\Phparm\Entity\Traits\PrefixMethod;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 

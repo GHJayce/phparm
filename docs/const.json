@@ -3,9 +3,11 @@
   "nameWithAuthor": "GHJayce/phparm",
   "author": {
     "name": "GHJayce",
+    "email": "jaycedeng@outlook.com",
     "homepage": "https://github.com/GHJayce"
   },
   "githubUrl": "https://github.com/GHJayce/phparm",
-  "docsUrl": "https://ghjayce.github.io/phparm",
-  "changelogUrl": "https://github.com/GHJayce/phparm/blob/main/changelog.md"
+  "docUrl": "https://ghjayce.github.io/phparm",
+  "changelogUrl": "https://github.com/GHJayce/phparm/blob/main/changelog.md",
+  "issueUrl": "https://github.com/GHJayce/phparm/issues"
 }

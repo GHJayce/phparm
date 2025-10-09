@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Weapon\Entity;
+namespace GhjayceTest\Phparm\Entity;
 
-use Ghjayce\Weapon\Entity\Attribute;
+use Ghjayce\Phparm\Entity\Attribute;
 
 /**
  * @method string getCpu()
