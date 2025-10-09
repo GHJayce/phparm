@@ -1,3 +1,3 @@
-# Weapons
+# PHPArm
 
 PHP arsenal.
