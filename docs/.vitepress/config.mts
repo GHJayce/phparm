@@ -4,14 +4,19 @@ import {
   type HeadConfig
 } from 'vitepress'
 
+import dotenv from 'dotenv'
 import fs from 'node:fs'
 import path from 'node:path'
 
 const constJsonPath = path.resolve('docs', 'const.json')
 const constConfig = JSON.parse(fs.readFileSync(constJsonPath, 'utf8'))
 
+dotenv.config()
+
+const env = process.env.ENV || 'prod'
+
 export default defineConfig({
-  // base: '/weapon/zh/',
+  base: env === 'prod' ? '/weapon' : '',
   // srcDir: './src',
   title: 'PHPArm',
 
