@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 error_reporting(E_ALL);
 
-$baseDir = dirname(__DIR__);
+$baseDir = __DIR__;
 
 require "$baseDir/vendor/autoload.php";
 
-$const = file_get_contents("$baseDir/docs/const.json");
+$const = file_get_contents("$baseDir/docs/info.json");
 $const = json_decode($const, true);
 
 if (!$const || !is_array($const)) {
