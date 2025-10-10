@@ -47,4 +47,9 @@ class Computer extends Attribute
     {
         return implode(',', [__FUNCTION__, $attribute]);
     }
+
+    public function toJson($options = JSON_THROW_ON_ERROR): string
+    {
+        return json_encode($this->all(), $options);
+    }
 }

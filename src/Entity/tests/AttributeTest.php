@@ -13,7 +13,7 @@ class AttributeTest extends TestCase
         return [
             'cpu' => 'Intel Core i7 2.8GHz',
             'gpu' => 'Intel HD Graphics 630',
-            'mainBoard' => 'ASUS B460M PLUS',
+            'mainBoard' => 'ASUS B460M PLUS / 超大碗',
             'memoryBank' => [
                 'DDR4 2400MHz 8G',
                 'DDR4 2400MHz 8G',
@@ -68,7 +68,7 @@ class AttributeTest extends TestCase
         $powerAttributes = $this->powerAttributes();
         $power = Power::make($powerAttributes);
         $computer->power = $power;
-        $this->assertSame(json_encode($attributes + ['power' => $powerAttributes]), $computer->toJson());
+        $this->assertSame(json_encode($attributes + ['power' => $powerAttributes], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), $computer->toJson(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
     public function testToArray(): void

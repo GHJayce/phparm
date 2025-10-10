@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Ghjayce\Phparm\Entity;
 
@@ -111,11 +111,10 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable
         $result = [];
         foreach ($this->getIterator() as $field => $value) {
             $finalValue = $value;
-            if ($value instanceof Jsonable) {
-                $finalValue = $value->toJson();
-                if ($value instanceof Arrayable) {
-                    $finalValue = $value->toArray();
-                }
+            if ($value instanceof Arrayable) {
+                $finalValue = $value->toArray();
+            } elseif ($value instanceof Jsonable) {
+                $finalValue = $value->toJson($options);
             }
             $result[$field] = $finalValue;
         }
