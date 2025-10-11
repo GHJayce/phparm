@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 error_reporting(E_ALL);
 
-$baseDir = __DIR__;
+$baseDir = dirname(__DIR__);
 
 require "$baseDir/vendor/autoload.php";
 
@@ -53,7 +53,7 @@ $packageDirPath = "$baseDir/src";
 $dirObject = opendir($packageDirPath);
 while (($fileFullName = readdir($dirObject)) !== false) {
     if ($fileFullName !== '.' && $fileFullName !== '..') {
-        writeToComposer($packageDirPath."/".$fileFullName."/composer.json", $const);
+        writeToComposer($packageDirPath . "/" . $fileFullName . "/composer.json", $const);
     }
 }
 closedir($dirObject);

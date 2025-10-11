@@ -32,13 +32,13 @@
         "phpunit/phpunit": "^9.6",
         "symplify/monorepo-builder": "^11.2"
     },
+    "replace": {
+        "ghjayce/phparm-entity": "self.version"
+    },
     "autoload": {
         "psr-4": {
             "Ghjayce\\Phparm\\Entity\\": "src/Entity/src/"
         }
-    },
-    "replace": {
-        "ghjayce/phparm-entity": "self.version"
     },
     "autoload-dev": {
         "psr-4": {
