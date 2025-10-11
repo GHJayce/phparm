@@ -1,9 +1,5 @@
 import {defineAdditionalConfig, type DefaultTheme} from 'vitepress'
-import fs from 'node:fs'
-import path from 'node:path'
-
-const constJsonPath = path.resolve('docs', 'const.json')
-const constConfig = JSON.parse(fs.readFileSync(constJsonPath, 'utf8'))
+import projectInfo from '@vp/info'
 
 export default defineAdditionalConfig({
   description: '由 Vite 和 Vue 驱动的静态站点生成器',
@@ -18,13 +14,13 @@ export default defineAdditionalConfig({
     },
 
     editLink: {
-      pattern: `${constConfig.githubUrl}/edit/main/docs/:path`,
+      pattern: `${projectInfo.githubUrl}/edit/main/docs/:path`,
       text: '在 GitHub 上编辑此页面'
     },
 
     footer: {
-      message: `发布于 <a href="${constConfig.githubUrl}/blob/main/LICENSE" target="_blank">MIT License</a>.`,
-      copyright: `版权所有 © 2018-至今 <a href="${constConfig.author.homepage}" target="_blank">GHJayce</a>`
+      message: `发布于 <a href="${projectInfo.githubUrl}/blob/main/LICENSE" target="_blank">MIT License</a>.`,
+      copyright: `版权所有 © 2018-至今 <a href="${projectInfo.authors[0].homepage}" target="_blank">GHJayce</a>`
     },
 
     docFooter: {

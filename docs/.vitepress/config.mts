@@ -3,21 +3,16 @@ import {
   resolveSiteDataByRoute,
   type HeadConfig
 } from 'vitepress'
-
-import dotenv from 'dotenv'
-import fs from 'node:fs'
+import projectInfo from './info'
 import path from 'node:path'
-
-const constJsonPath = path.resolve('docs', 'const.json')
-const constConfig = JSON.parse(fs.readFileSync(constJsonPath, 'utf8'))
+import dotenv from 'dotenv'
 
 dotenv.config()
-
 const env = process.env.ENV || 'prod'
 
 export default defineConfig({
-  base: env === 'prod' ? '/' + constConfig.name : '',
-  // srcDir: './src',
+  base: env === 'prod' ? '/' + projectInfo.name : '',
+  srcDir: './src',
   title: 'PHPArm',
 
   rewrites: {
@@ -36,14 +31,11 @@ export default defineConfig({
           return code.replace(/\[\!\!code/g, '[!code')
         }
       }
-    ],
-    config: (md) => {
-      console.log(md)
-    }
+    ]
   },
 
   sitemap: {
-    hostname: constConfig.docsUrl,
+    hostname: projectInfo.docUrl,
     transformItems(items) {
       return items.filter((item) => item.url.indexOf('migration') === -1)
     }
@@ -60,7 +52,7 @@ export default defineConfig({
     // ],
     ['meta', {name: 'theme-color', content: '#5f67ee'}],
     ['meta', {property: 'og:type', content: 'website'}],
-    ['meta', {property: 'og:site_name', content: constConfig.nameWithAuthor}],
+    ['meta', {property: 'og:site_name', content: projectInfo.nameWithAuthor}],
     // [
     //   'meta',
     //   {
@@ -68,7 +60,7 @@ export default defineConfig({
     //     content: 'https://domain.com/-og.jpg'
     //   }
     // ],
-    ['meta', {property: 'og:url', content: constConfig.docsUrl}],
+    ['meta', {property: 'og:url', content: projectInfo.docUrl}],
     [
       'script',
       {
@@ -84,7 +76,7 @@ export default defineConfig({
     // logo: {src: '/logo-mini.svg', width: 24, height: 24},
 
     socialLinks: [
-      {icon: 'github', link: constConfig.githubUrl}
+      {icon: 'github', link: projectInfo.githubUrl}
     ],
 
     search: {
@@ -107,7 +99,9 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '../')
+        '@doc': path.resolve(__dirname, '../../'),
+        '@vp': path.resolve('./'),
+        '@src': path.resolve(__dirname, '../src'),
       }
     },
     plugins: [],

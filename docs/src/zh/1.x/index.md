@@ -4,14 +4,6 @@ lang: zh
 editLink: true
 ---
 
-<script setup>
-import constConfig from '@/const.json';
-const changelogUrl = constConfig.changelogUrl;
-import { useData } from 'vitepress';
-
-const { page } = useData();
-</script>
-
 # 入门
 
 ## 介绍
@@ -25,4 +17,4 @@ PHPArm是一个实用的PHP工具库，以解决开发过程中遇到的实际�
 
 ## 更新日志
 
-[CHANGELOG]( {{changelogUrl}} )
+[CHANGELOG]()

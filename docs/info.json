@@ -1,11 +1,11 @@
 {
   "name": "phparm",
   "nameWithAuthor": "GHJayce/phparm",
-  "author": {
+  "authors": [{
     "name": "GHJayce",
     "email": "jaycedeng@outlook.com",
     "homepage": "https://github.com/GHJayce"
-  },
+  }],
   "githubUrl": "https://github.com/GHJayce/phparm",
   "docUrl": "https://ghjayce.github.io/phparm",
   "changelogUrl": "https://github.com/GHJayce/phparm/blob/main/changelog.md",
