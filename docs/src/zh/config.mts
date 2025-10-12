@@ -1,16 +1,16 @@
 import {defineAdditionalConfig, type DefaultTheme} from 'vitepress'
-import projectInfo from '@vp/info'
+import projectInfo from '../../.vitepress/info.mjs'
 
 export default defineAdditionalConfig({
   description: '由 Vite 和 Vue 驱动的静态站点生成器',
 
   themeConfig: {
-    nav: nav(),
+    // nav: nav(),
 
     search: {options: searchOptions()},
 
     sidebar: {
-      '/guide/': {base: '/zh/guide/', items: sidebarGuide()},
+      '/': {base: '/zh/', items: sidebarGuide()},
     },
 
     editLink: {
@@ -78,7 +78,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '快速入门',
       collapsed: false,
       items: [
-        {text: '介绍', link: 'what-is-vitepress'},
+        {text: '介绍', link: 'introduce'},
         {text: '安装', link: 'getting-started'}
       ]
     }

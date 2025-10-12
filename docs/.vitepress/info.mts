@@ -1,6 +1,4 @@
-// @ts-ignore
 import fs from 'node:fs'
-// @ts-ignore
 import path from 'node:path'
 
 interface authors {

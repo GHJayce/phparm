@@ -3,17 +3,26 @@ import {
   resolveSiteDataByRoute,
   type HeadConfig
 } from 'vitepress'
-import projectInfo from './info'
-import path from 'node:path'
+import projectInfo from './info.mjs'
 import dotenv from 'dotenv'
 
 dotenv.config()
 const env = process.env.ENV || 'prod'
 
 export default defineConfig({
+
+  vite: {
+    resolve: {
+      alias: {
+      }
+    },
+    plugins: [],
+    experimental: {}
+  },
+
   base: env === 'prod' ? '/' + projectInfo.name : '',
   srcDir: './src',
-  title: 'PHPArm',
+  title: projectInfo.name,
 
   rewrites: {
     'zh/:rest*': ':rest*'
@@ -94,18 +103,6 @@ export default defineConfig({
   locales: {
     root: {label: '简体中文', lang: 'zh', dir: 'ltr'},
     en: {label: 'English', lang: 'en', dir: 'ltr'},
-  },
-
-  vite: {
-    resolve: {
-      alias: {
-        '@doc': path.resolve(__dirname, '../../'),
-        '@vp': path.resolve('./'),
-        '@src': path.resolve(__dirname, '../src'),
-      }
-    },
-    plugins: [],
-    experimental: {}
   },
 
   transformPageData: (pageData, ctx) => {

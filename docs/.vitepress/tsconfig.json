@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "baseUrl": "."
+  },
+  "include": [
+    "./*",
+    "../src/*"
+  ]
+}
