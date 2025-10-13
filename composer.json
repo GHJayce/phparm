@@ -33,16 +33,19 @@
         "symplify/monorepo-builder": "^11.2"
     },
     "replace": {
-        "ghjayce/phparm-entity": "self.version"
+        "ghjayce/phparm-entity": "self.version",
+        "ghjayce/phparm-url": "self.version"
     },
     "autoload": {
         "psr-4": {
-            "Ghjayce\\Phparm\\Entity\\": "src/Entity/src/"
+            "Ghjayce\\Phparm\\Entity\\": "src/Entity/src/",
+            "Ghjayce\\Phparm\\Url\\": "src/Url/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GhjayceTest\\Phparm\\Entity\\": "src/Entity/tests/"
+            "GhjayceTest\\Phparm\\Entity\\": "src/Entity/tests/",
+            "GhjayceTest\\Phparm\\Url\\": "src/Url/tests/"
         }
     },
     "scripts": {

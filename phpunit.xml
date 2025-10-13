@@ -17,5 +17,8 @@
         <testsuite name="Entity">
             <directory suffix=".php">src/Entity/tests</directory>
         </testsuite>
+        <testsuite name="Url">
+            <directory suffix=".php">src/Url/tests</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

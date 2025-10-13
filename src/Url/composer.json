@@ -1,0 +1,46 @@
+{
+    "name": "ghjayce/phparm-url",
+    "description": "Url tool library.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "php",
+        "url",
+        "library"
+    ],
+    "homepage": "https://github.com/GHJayce/phparm",
+    "authors": [
+        {
+            "name": "GHJayce",
+            "email": "jaycedeng@outlook.com",
+            "homepage": "https://github.com/GHJayce",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/GHJayce/phparm/issues",
+        "docs": "https://ghjayce.github.io/phparm"
+    },
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^8.83"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ghjayce\\Phparm\\Url\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GhjayceTest\\Phparm\\Url\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
+    },
+    "scripts": {
+        "test": [
+            "phpunit"
+        ]
+    }
+}

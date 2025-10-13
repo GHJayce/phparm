@@ -8,11 +8,11 @@ use Ghjayce\Phparm\Entity\Traits\PrefixMethod;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
-class Attribute implements \IteratorAggregate, Arrayable, Jsonable
+class Attribute implements \IteratorAggregate, Arrayable, Jsonable, \Stringable
 {
     use PrefixMethod;
 
-    public function __construct(array $attributes = [], array $options = [])
+    public function __construct(mixed $attributes = null, array $options = [])
     {
         $this->fill($attributes, $options);
     }
@@ -26,14 +26,22 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable
         throw new \BadMethodCallException('Unsupported operation');
     }
 
-    public static function make(array $attributes = [], array $options = []): static
+    public function __toString(): string
+    {
+        return serialize($this->all());
+    }
+
+    public static function make(mixed $attributes = null, array $options = []): static
     {
         return new static($attributes, $options);
     }
 
-    public function fill(array $attributes, array $options = []): static
+    public function fill($attributes = null, array $options = []): static
     {
         if (!$attributes) {
+            return $this;
+        }
+        if (!is_array($attributes)) {
             return $this;
         }
         $iterator = $this->getIterator();
