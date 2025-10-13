@@ -4,15 +4,28 @@ declare(strict_types=1);
 
 namespace Ghjayce\Phparm\Entity;
 
+use ArrayIterator;
+use BadMethodCallException;
 use Ghjayce\Phparm\Entity\Traits\PrefixMethod;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use IteratorAggregate;
+use JsonSerializable;
+use Stringable;
 
-class Attribute implements \IteratorAggregate, Arrayable, Jsonable, \Stringable
+/**
+ * @template TKey of array-key
+ * @template TValue
+ */
+class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, JsonSerializable
 {
     use PrefixMethod;
 
-    public function __construct(mixed $attributes = null, array $options = [])
+    /**
+     * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
+     * @param array $options
+     */
+    public function __construct($attributes = null, array $options = [])
     {
         $this->fill($attributes, $options);
     }
@@ -23,7 +36,7 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable, \Stringable
         if ($prefixResult && is_array($prefixResult)) {
             return call_user_func(...$prefixResult);
         }
-        throw new \BadMethodCallException('Unsupported operation');
+        throw new BadMethodCallException('Unsupported operation');
     }
 
     public function __toString(): string
@@ -31,19 +44,51 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable, \Stringable
         return serialize($this->all());
     }
 
-    public static function make(mixed $attributes = null, array $options = []): static
+    /**
+     * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
+     * @return array<TKey,TValue>
+     */
+    protected function transform($attributes): array
+    {
+        if (is_null($attributes)) {
+            return [];
+        }
+        if (is_array($attributes)) {
+            return $attributes;
+        }
+        if ($attributes instanceof static) {
+            return $attributes->all();
+        }
+        if ($attributes instanceof Arrayable) {
+            return $attributes->toArray();
+        }
+        if ($attributes instanceof Jsonable) {
+            return json_decode($attributes->toJson(), true);
+        }
+        if ($attributes instanceof JsonSerializable) {
+            return $attributes->jsonSerialize();
+        }
+        return (array) $attributes;
+    }
+
+    /**
+     * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
+     * @param array $options
+     * @return $this
+     */
+    public static function make($attributes = null, array $options = []): static
     {
         return new static($attributes, $options);
     }
 
+    /**
+     * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
+     * @param array $options
+     * @return $this
+     */
     public function fill($attributes = null, array $options = []): static
     {
-        if (!$attributes) {
-            return $this;
-        }
-        if (!is_array($attributes)) {
-            return $this;
-        }
+        $attributes = $this->transform($attributes);
         $iterator = $this->getIterator();
         foreach ($attributes as $attribute => $value) {
             if (
@@ -81,17 +126,23 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable, \Stringable
     {
         $iterator = $this->getIterator();
         if (!$iterator->offsetExists($attribute)) {
-            throw new \BadMethodCallException(sprintf('Property "%s" is not public or is not defined.', $attribute));
+            throw new BadMethodCallException(sprintf('Property "%s" is not public or is not defined.', $attribute));
         }
         $this->$attribute = $args[0];
         return $this;
     }
 
-    public function getIterator(): \ArrayIterator
+    /**
+     * @return ArrayIterator<TKey, TValue>
+     */
+    public function getIterator(): ArrayIterator
     {
-        return new \ArrayIterator($this);
+        return new ArrayIterator($this);
     }
 
+    /**
+     * @return array<TKey, TValue>
+     */
     public function all(): array
     {
         $result = [];
@@ -101,6 +152,9 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable, \Stringable
         return $result;
     }
 
+    /**
+     * @return array<TKey, mixed>
+     */
     public function toArray(): array
     {
         $result = [];
@@ -116,16 +170,25 @@ class Attribute implements \IteratorAggregate, Arrayable, Jsonable, \Stringable
 
     public function toJson($options = JSON_THROW_ON_ERROR): string
     {
-        $result = [];
-        foreach ($this->getIterator() as $field => $value) {
-            $finalValue = $value;
-            if ($value instanceof Arrayable) {
-                $finalValue = $value->toArray();
-            } elseif ($value instanceof Jsonable) {
-                $finalValue = $value->toJson($options);
+        return json_encode($this->jsonSerialize(), $options);
+    }
+
+    /**
+     * @return array<TKey, mixed>
+     */
+    public function jsonSerialize(): array
+    {
+        return array_map(static function ($value) {
+            if ($value instanceof JsonSerializable) {
+                return $value->jsonSerialize();
             }
-            $result[$field] = $finalValue;
-        }
-        return json_encode($result, $options);
+            if ($value instanceof Jsonable) {
+                return json_decode($value->toJson(), true);
+            }
+            if ($value instanceof Arrayable) {
+                return $value->toArray();
+            }
+            return $value;
+        }, (array)$this->getIterator());
     }
 }

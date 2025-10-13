@@ -5,21 +5,30 @@ declare(strict_types=1);
 namespace Ghjayce\Phparm\Url;
 
 use Ghjayce\Phparm\Entity\StringValue;
+use Illuminate\Contracts\Support\Arrayable;
 
 /**
+ * @template TKey of array-key
+ * @template TValue
+ *
  * @method string getValue()
  * @method self setValue(string $value)
  */
 class Query extends StringValue
 {
-    protected function transform(mixed $attributes = [], array $options = []): array
+    /**
+     * @param Arrayable<TKey,TValue>|string $attributes
+     * @param array $options
+     * @return array
+     */
+    protected function transform($attributes, array $options = []): array
     {
         if (is_array($attributes)) {
             $attributes = [
                 'value' => $this->build($attributes),
             ];
         }
-        return parent::transform($attributes);
+        return parent::transform($attributes, $options);
     }
 
     public function build(array|object $query, array $options = []): string

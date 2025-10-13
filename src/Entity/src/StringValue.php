@@ -4,7 +4,14 @@ declare(strict_types=1);
 
 namespace Ghjayce\Phparm\Entity;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+use JsonSerializable;
+
 /**
+ * @template TKey of array-key
+ * @template TValue
+ *
  * @method string getValue()
  * @method self setValue(string $value)
  */
@@ -18,28 +25,16 @@ class StringValue extends Attribute
     }
 
     /**
-     * @param string $attributes
-     * @param array $options
-     * @return $this
+     * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
+     * @return array<TKey,TValue>
      */
-    public function fill($attributes = null, array $options = []): static
-    {
-        $newAttributes = $this->transform($attributes);
-        return parent::fill($newAttributes, $options);
-    }
-
-    /**
-     * @param string $attributes
-     * @param array $options
-     * @return array|string[]
-     */
-    protected function transform(mixed $attributes = null, array $options = []): array
+    protected function transform($attributes, array $options = []): array
     {
         if (is_string($attributes)) {
             $attributes = [
                 'value' => $attributes,
             ];
         }
-        return $attributes;
+        return parent::transform($attributes, $options);
     }
 }

@@ -5,8 +5,13 @@ declare(strict_types=1);
 namespace Ghjayce\Phparm\Url;
 
 use Ghjayce\Phparm\Entity\Attribute;
+use Illuminate\Contracts\Support\Arrayable;
+use InvalidArgumentException;
 
 /**
+ * @template TKey of array-key
+ * @template TValue
+ *
  * @method Query|null getQuery()
  * @method self setQuery(Query|null $query)
  */
@@ -21,7 +26,11 @@ class Url extends Attribute
     public ?Query $query = null;
     public string $fragment;
 
-    public function __construct(array|string $attributes, array $options = [])
+    /**
+     * @param Arrayable<TKey,TValue>|string $attributes
+     * @param array $options
+     */
+    public function __construct($attributes, array $options = [])
     {
         parent::__construct($attributes, $options);
     }
@@ -46,17 +55,17 @@ class Url extends Attribute
      * @param array $options
      * @return static
      */
-    public static function make(mixed $attributes = null, array $options = []): static
+    public static function make($attributes = null, array $options = []): static
     {
         return parent::make($attributes, $options);
     }
 
     /**
-     * @param array|string $attributes
+     * @param Arrayable<TKey,TValue>|string $attributes
      * @param array $options
-     * @return $this
+     * @return array
      */
-    public function fill($attributes = null, array $options = []): static
+    protected function transform($attributes, array $options = []): array
     {
         if (is_string($attributes)) {
             $attributes = $this->parse($attributes);
@@ -64,10 +73,10 @@ class Url extends Attribute
                 $attributes['query'] = Query::make($attributes['query']);
             }
         }
-        return parent::fill($attributes, $options);
+        return parent::transform($attributes, $options);
     }
 
-    public function baseUrl(): string
+    public function base(): string
     {
         return implode('', [
             $this->scheme ?: '',
@@ -79,16 +88,21 @@ class Url extends Attribute
         ]);
     }
 
-    public function swapBaseUrl(string $replaceUrl): static
+    public function swapBase(string $swapUrl): static
     {
-        $urlInfo = $this->parse($replaceUrl);
-        return self::make(array_merge($this->all(), $urlInfo));
+        $urlInfo = $this->parse($swapUrl);
+        $this->scheme = $urlInfo['scheme'] ?? '';
+        $this->user = $urlInfo['user'] ?? '';
+        $this->pass = $urlInfo['pass'] ?? '';
+        $this->host = $urlInfo['host'] ?? '';
+        $this->port = $urlInfo['port'] ?? 0;
+        return $this;
     }
 
     protected function parse(string $url): array
     {
         if (!str_starts_with($url, 'http')) {
-            throw new \InvalidArgumentException('Invalid url');
+            throw new InvalidArgumentException('Invalid url');
         }
         return parse_url($url) ?: [];
     }
