@@ -20,15 +20,17 @@ class Query extends StringValue
      * @param Arrayable<TKey,TValue>|string $attributes
      * @param array $options
      * @return array
+     * @throws \JsonException
      */
     protected function transform($attributes, array $options = []): array
     {
-        if (is_array($attributes)) {
-            $attributes = [
+        $data = $attributes;
+        if (is_array($data)) {
+            $data = [
                 'value' => $this->build($attributes),
             ];
         }
-        return parent::transform($attributes, $options);
+        return parent::transform($data, $options);
     }
 
     public function build(array|object $query, array $options = []): string

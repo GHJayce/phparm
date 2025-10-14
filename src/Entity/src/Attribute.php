@@ -10,6 +10,7 @@ use Ghjayce\Phparm\Entity\Traits\PrefixMethod;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use IteratorAggregate;
+use JsonException;
 use JsonSerializable;
 use Stringable;
 
@@ -24,6 +25,7 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
      * @param array $options
+     * @throws JsonException
      */
     public function __construct($attributes = null, array $options = [])
     {
@@ -47,6 +49,7 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
      * @return array<TKey,TValue>
+     * @throws JsonException
      */
     protected function transform($attributes): array
     {
@@ -68,13 +71,14 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
         if ($attributes instanceof JsonSerializable) {
             return $attributes->jsonSerialize();
         }
-        return (array) $attributes;
+        return (array)$attributes;
     }
 
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
      * @param array $options
      * @return $this
+     * @throws JsonException
      */
     public static function make($attributes = null, array $options = []): static
     {
@@ -85,12 +89,13 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
      * @param array $options
      * @return $this
+     * @throws JsonException
      */
     public function fill($attributes = null, array $options = []): static
     {
-        $attributes = $this->transform($attributes);
+        $data = $this->transform($attributes);
         $iterator = $this->getIterator();
-        foreach ($attributes as $attribute => $value) {
+        foreach ($data as $attribute => $value) {
             if (
                 (
                     !is_string($attribute)
@@ -175,6 +180,7 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
 
     /**
      * @return array<TKey, mixed>
+     * @throws JsonException
      */
     public function jsonSerialize(): array
     {
@@ -183,7 +189,7 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
                 return $value->jsonSerialize();
             }
             if ($value instanceof Jsonable) {
-                return json_decode($value->toJson(), true);
+                return json_decode($value->toJson(), true, 512, JSON_THROW_ON_ERROR);
             }
             if ($value instanceof Arrayable) {
                 return $value->toArray();

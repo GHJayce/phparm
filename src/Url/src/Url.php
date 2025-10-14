@@ -64,16 +64,18 @@ class Url extends Attribute
      * @param Arrayable<TKey,TValue>|string $attributes
      * @param array $options
      * @return array
+     * @throws \JsonException
      */
     protected function transform($attributes, array $options = []): array
     {
-        if (is_string($attributes)) {
-            $attributes = $this->parse($attributes);
-            if (isset($attributes['query'])) {
-                $attributes['query'] = Query::make($attributes['query']);
+        $data = $attributes;
+        if (is_string($data)) {
+            $data = $this->parse($attributes);
+            if (isset($data['query'])) {
+                $data['query'] = Query::make($data['query']);
             }
         }
-        return parent::transform($attributes, $options);
+        return parent::transform($data, $options);
     }
 
     public function base(): string
