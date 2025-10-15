@@ -10,7 +10,6 @@ use Ghjayce\Phparm\Entity\Traits\PrefixMethod;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use IteratorAggregate;
-use JsonException;
 use JsonSerializable;
 use Stringable;
 
@@ -25,7 +24,6 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
      * @param array $options
-     * @throws JsonException
      */
     public function __construct($attributes = null, array $options = [])
     {
@@ -49,7 +47,6 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
      * @return array<TKey,TValue>
-     * @throws JsonException
      */
     protected function transform($attributes): array
     {
@@ -78,7 +75,6 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
      * @param array $options
      * @return $this
-     * @throws JsonException
      */
     public static function make($attributes = null, array $options = []): static
     {
@@ -89,7 +85,6 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
      * @param array $options
      * @return $this
-     * @throws JsonException
      */
     public function fill($attributes = null, array $options = []): static
     {
@@ -145,9 +140,6 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
         return new ArrayIterator($this);
     }
 
-    /**
-     * @return array<TKey, TValue>
-     */
     public function all(): array
     {
         $result = [];
@@ -157,9 +149,6 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
         return $result;
     }
 
-    /**
-     * @return array<TKey, mixed>
-     */
     public function toArray(): array
     {
         $result = [];
@@ -178,10 +167,6 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
         return json_encode($this->jsonSerialize(), $options);
     }
 
-    /**
-     * @return array<TKey, mixed>
-     * @throws JsonException
-     */
     public function jsonSerialize(): array
     {
         return array_map(static function ($value) {

@@ -27,7 +27,6 @@ class StringValue extends Attribute
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue>|string $attributes
      * @return array<TKey,TValue>
-     * @throws \JsonException
      */
     protected function transform($attributes, array $options = []): array
     {

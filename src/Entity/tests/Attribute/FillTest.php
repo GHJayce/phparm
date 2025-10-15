@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GhjayceTest\Phparm\Entity\Attribute;
 
-use GhjayceTest\Phparm\Entity\Data;
-use GhjayceTest\Phparm\Entity\Tiger;
+use GhjayceTest\Phparm\Entity\Entity\Data;
+use GhjayceTest\Phparm\Entity\Entity\Tiger;
 use PHPUnit\Framework\TestCase;
 
 class FillTest extends TestCase

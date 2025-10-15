@@ -20,7 +20,6 @@ class Query extends StringValue
      * @param Arrayable<TKey,TValue>|string $attributes
      * @param array $options
      * @return array
-     * @throws \JsonException
      */
     protected function transform($attributes, array $options = []): array
     {

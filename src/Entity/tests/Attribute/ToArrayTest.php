@@ -4,19 +4,26 @@ declare(strict_types=1);
 
 namespace GhjayceTest\Phparm\Entity\Attribute;
 
-use GhjayceTest\Phparm\Entity\Computer;
-use GhjayceTest\Phparm\Entity\Power;
+use GhjayceTest\Phparm\Entity\Entity\Data;
+use GhjayceTest\Phparm\Entity\Entity\Tiger;
+use GhjayceTest\Phparm\Entity\Entity\Zoo;
 use PHPUnit\Framework\TestCase;
 
 class ToArrayTest extends TestCase
 {
     public function testToArray(): void
     {
-        $attributes = $this->getComputerAttributes();
-        $computer = Computer::make($attributes);
-        $powerAttributes = $this->powerAttributes();
-        $power = Power::make($powerAttributes);
-        $computer->power = $power;
-        $this->assertSame($attributes + ['power' => $powerAttributes], $computer->toArray());
+        $tiger1 = Data::manchurianTiger();
+        $tiger1['name'] = '阳阳';
+        $tiger2 = Data::southChinaTiger();
+        $tiger2['name'] = '虎妞';
+        $zoo = Zoo::make();
+        $zoo->manchurianTiger = Tiger::make($tiger1);
+        $zoo->southChinaTiger = Tiger::make($tiger2);
+        $this->assertSame([
+            'manchurianTiger' => $tiger1,
+            'southChinaTiger' => $tiger2,
+            'javanTiger' => null,
+        ], $zoo->toArray());
     }
 }

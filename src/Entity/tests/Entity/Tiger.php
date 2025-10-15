@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Phparm\Entity;
+namespace GhjayceTest\Phparm\Entity\Entity;
 
 class Tiger extends Taxonomy
 {

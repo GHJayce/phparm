@@ -7,16 +7,16 @@ namespace GhjayceTest\Phparm\Entity\Attribute;
 use GhjayceTest\Phparm\Entity\Entity\Tiger;
 use PHPUnit\Framework\TestCase;
 
-class AllTest extends TestCase
+class IteratorTest extends TestCase
 {
-    public function testOnlyAssigned(): void
+    public function testEach(): void
     {
         $tiger = Tiger::make();
-        $tiger->name = 'ManchurianTiger';
-        $tiger->age = 2;
+        $tiger->name = '华北虎';
+        $tiger->age = 3;
         $this->assertSame([
-            'name' => 'ManchurianTiger',
-            'age' => 2,
+            'name' => '华北虎',
+            'age' => 3,
         ], $tiger->all());
     }
 }
