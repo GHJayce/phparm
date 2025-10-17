@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GhjayceTest\Phparm\Entity\PrefixMethod;
+
+use GhjayceTest\Phparm\Entity\Entity\Tiger;
+use PHPUnit\Framework\TestCase;
+
+class ExceptionTest extends TestCase
+{
+    public function testNotExists(): void
+    {
+        $this->expectException(\BadFunctionCallException::class);
+        $computer = Tiger::make();
+        $computer->setMother('gaga');
+    }
+
+    public function testSetNotPublic(): void
+    {
+        $this->expectException(\BadFunctionCallException::class);
+        $computer = Tiger::make();
+        $computer->setIucn('LC');
+    }
+
+    public function testNotDefine(): void
+    {
+        $this->expectException(\BadFunctionCallException::class);
+        $computer = Tiger::make();
+        $computer->cpu();
+    }
+}

@@ -180,6 +180,6 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
                 return $value->toArray();
             }
             return $value;
-        }, (array)$this->getIterator());
+        }, $this->all());
     }
 }
