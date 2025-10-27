@@ -20,7 +20,7 @@ export default defineAdditionalConfig({
 
     footer: {
       message: `发布于 <a href="${projectInfo.githubUrl}/blob/main/LICENSE" target="_blank">MIT License</a>.`,
-      copyright: `版权所有 © 2018-至今 <a href="${projectInfo.authors[0].homepage}" target="_blank">GHJayce</a>`
+      copyright: `版权所有 © 2018-至今 <a href="${projectInfo.authors[0].homepage}" target="_blank">${projectInfo.authors[0].name}</a>`
     },
 
     docFooter: {
@@ -75,11 +75,11 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
     {
-      text: '快速入门',
+      text: '快速开始',
       collapsed: false,
       items: [
         {text: '介绍', link: 'introduce'},
-        {text: '安装', link: 'getting-started'}
+        {text: '安装', link: 'installation'}
       ]
     }
   ]

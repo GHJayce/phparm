@@ -1,3 +1,3 @@
-# PHPArm
+# phparm
 
 PHP arsenal.

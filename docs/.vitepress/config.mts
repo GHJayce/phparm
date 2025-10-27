@@ -13,8 +13,7 @@ export default defineConfig({
 
   vite: {
     resolve: {
-      alias: {
-      }
+      alias: {}
     },
     plugins: [],
     experimental: {}
@@ -89,20 +88,20 @@ export default defineConfig({
     ],
 
     search: {
-      // provider: 'local'
-      provider: 'algolia',
-      options: {
-        appId: '8J64VVRP8K',
-        apiKey: '52f578a92b88ad6abde815aae2b0ad7c',
-        indexName: 'vitepress',
-        askAi: 'YaVSonfX5bS8'
-      }
+      provider: 'local'
+      // provider: 'algolia',
+      // options: {
+      //   appId: '8J64VVRP8K',
+      //   apiKey: '52f578a92b88ad6abde815aae2b0ad7c',
+      //   indexName: 'vitepress',
+      //   askAi: 'YaVSonfX5bS8'
+      // }
     },
   },
 
   locales: {
-    root: {label: '简体中文', lang: 'zh', dir: 'ltr'},
-    en: {label: 'English', lang: 'en', dir: 'ltr'},
+    root: {label: '简体中文', lang: 'zh', dir: 'zh'},
+    en: {label: 'English', lang: 'en', dir: 'en'},
   },
 
   transformPageData: (pageData, ctx) => {

@@ -1,45 +1,47 @@
 import {defineAdditionalConfig, type DefaultTheme} from 'vitepress'
+import projectInfo from '../../.vitepress/info.mjs'
 
 export default defineAdditionalConfig({
-  description: 'Vite & Vue powered static site generator.',
+  description: '由 Vite 和 Vue 驱动的静态站点生成器',
 
   themeConfig: {
-    nav: nav(),
+    // nav: nav(),
+
+    search: {options: searchOptions()},
 
     sidebar: {
-      '/en/guide/': {base: '/en/guide/', items: sidebarGuide()},
-      '/en/reference/': {base: '/en/reference/', items: sidebarReference()}
+      '/': {base: '/en/', items: sidebarGuide()},
     },
 
     editLink: {
-      pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
+      pattern: `${projectInfo.githubUrl}/edit/main/docs/:path`,
       text: '在 GitHub 上编辑此页面'
     },
 
     footer: {
-      message: '基于 MIT 许可发布',
-      copyright: '版权所有 © 2019-至今 尤雨溪'
+      message: `Released under the <a href="${projectInfo.githubUrl}/blob/main/LICENSE" target="_blank">MIT License</a>.`,
+      copyright: `Copyright © 2018-present <a href="${projectInfo.authors[0].homepage}" target="_blank">${projectInfo.authors[0].name}</a>`
     },
 
     docFooter: {
-      prev: 'prev page',
-      next: 'next page'
+      prev: 'Previous page',
+      next: 'Next page'
     },
 
     outline: {
-      label: '页面导航'
+      label: 'On this page'
     },
 
     lastUpdated: {
-      text: '最后更新于'
+      text: 'Last updated'
     },
 
     notFound: {
-      title: '页面未找到',
+      title: 'PAGE NOT FOUND',
       quote:
-        '但如果你不改变方向，并且继续寻找，你可能最终会到达你所前往的地方。',
-      linkLabel: '前往首页',
-      linkText: '带我回首页'
+        'But if you don\'t change your direction, and if you keep looking, you may end up where you are heading.',
+      linkLabel: 'Take me home',
+      linkText: 'Take me home'
     },
 
     langMenuLabel: '多语言',
@@ -52,33 +54,18 @@ export default defineAdditionalConfig({
   }
 })
 
-
 function nav(): DefaultTheme.NavItem[] {
   return [
-    {
-      text: 'Guide',
-      link: '/guide/what-is-vitepress',
-      activeMatch: '/guide/'
-    },
-    {
-      text: 'Reference',
-      link: '/reference/site-config',
-      activeMatch: '/reference/'
-    },
     {
       text: '版本',
       items: [
         {
-          text: '1.6.4',
-          link: 'https://vuejs.github.io/vitepress/v1/'
+          text: '1.x',
+          link: './1.x'
         },
         {
-          text: 'Changelog',
+          text: '更新日志',
           link: 'https://github.com/vuejs/vitepress/blob/main/CHANGELOG.md'
-        },
-        {
-          text: 'Contributing',
-          link: 'https://github.com/vuejs/vitepress/blob/main/.github/contributing.md'
         }
       ]
     }
@@ -88,80 +75,11 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
     {
-      text: 'Introduction',
+      text: 'Quick Start',
       collapsed: false,
       items: [
-        {text: 'What is VitePress?', link: 'what-is-vitepress'},
-        {text: 'Getting Started', link: 'getting-started'},
-        {text: 'Routing', link: 'routing'},
-        {text: 'Deploy', link: 'deploy'}
-      ]
-    },
-    {
-      text: 'Writing',
-      collapsed: false,
-      items: [
-        {text: 'Markdown Extensions', link: 'markdown'},
-        {text: 'Asset Handling', link: 'asset-handling'},
-        {text: 'Frontmatter', link: 'frontmatter'},
-        {text: 'Using Vue in Markdown', link: 'using-vue'},
-        {text: 'Internationalization', link: 'i18n'}
-      ]
-    },
-    {
-      text: 'Customization',
-      collapsed: false,
-      items: [
-        {text: 'Using a Custom Theme', link: 'custom-theme'},
-        {
-          text: 'Extending the Default Theme',
-          link: 'extending-default-theme'
-        },
-        {text: 'Build-Time Data Loading', link: 'data-loading'},
-        {text: 'SSR Compatibility', link: 'ssr-compat'},
-        {text: 'Connecting to a CMS', link: 'cms'}
-      ]
-    },
-    {
-      text: 'Experimental',
-      collapsed: false,
-      items: [
-        {text: 'MPA Mode', link: 'mpa-mode'},
-        {text: 'Sitemap Generation', link: 'sitemap-generation'}
-      ]
-    },
-    {text: 'Config & API Reference', base: '/reference/', link: 'site-config'}
-  ]
-}
-
-function sidebarReference(): DefaultTheme.SidebarItem[] {
-  return [
-    {
-      text: 'Reference',
-      items: [
-        {text: 'Site Config', link: 'site-config'},
-        {text: 'Frontmatter Config', link: 'frontmatter-config'},
-        {text: 'Runtime API', link: 'runtime-api'},
-        {text: 'CLI', link: 'cli'},
-        {
-          text: 'Default Theme',
-          base: '/reference/default-theme-',
-          items: [
-            {text: 'Overview', link: 'config'},
-            {text: 'Nav', link: 'nav'},
-            {text: 'Sidebar', link: 'sidebar'},
-            {text: 'Home Page', link: 'home-page'},
-            {text: 'Footer', link: 'footer'},
-            {text: 'Layout', link: 'layout'},
-            {text: 'Badge', link: 'badge'},
-            {text: 'Team Page', link: 'team-page'},
-            {text: 'Prev / Next Links', link: 'prev-next-links'},
-            {text: 'Edit Link', link: 'edit-link'},
-            {text: 'Last Updated Timestamp', link: 'last-updated'},
-            {text: 'Search', link: 'search'},
-            {text: 'Carbon Ads', link: 'carbon-ads'}
-          ]
-        }
+        {text: 'Introduce', link: 'introduce'},
+        {text: 'Installation', link: 'installation'}
       ]
     }
   ]

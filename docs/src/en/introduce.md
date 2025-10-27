@@ -1,12 +1,13 @@
 ---
-title: 介绍
-lang: zh
+title: introduce
+lang: en
 editLink: true
 ---
 
-## 介绍
+## introduce
 
-phparm 是一个专为现代 PHP 开发者打造的实用工具库。它遵循 “少依赖、多产出” 的设计哲学，旨在解决日常开发中的常见痛点，并显著提升编码效率。
+phparm empowers modern PHP developers. Stop wrestling with common pitfalls. This focused library, built on a "lean and
+mean" philosophy, streamlines your work to elevate productivity.
 
 <p>
 <a href="https://packagist.org/packages/ghjayce/phparm"><img src="https://img.shields.io/packagist/dt/ghjayce/phparm" alt="Total Downloads"></a>
