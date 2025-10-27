@@ -23,6 +23,7 @@
     },
     "require": {
         "php": "^8.0",
+        "ghjayce/phparm-entity": "^1.0",
         "illuminate/contracts": "^8.83"
     },
     "autoload": {
