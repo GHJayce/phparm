@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ghjayce\Phparm\Url;
 
+use Ghjayce\Phparm\Entity\Option;
 use Ghjayce\Phparm\Entity\StringValue;
+use Ghjayce\Phparm\Url\Option\QueryOption;
 use Illuminate\Contracts\Support\Arrayable;
 
 /**
@@ -18,27 +20,27 @@ class Query extends StringValue
 {
     /**
      * @param Arrayable<TKey,TValue>|string $attributes
-     * @param array $options
+     * @param QueryOption|null $option
      * @return array
      */
-    protected function transform($attributes, array $options = []): array
+    protected function transform($attributes, ?Option $option = null): array
     {
         $data = $attributes;
         if (is_array($data)) {
             $data = [
-                'value' => $this->build($attributes),
+                'value' => $this->build($attributes, $option),
             ];
         }
-        return parent::transform($data, $options);
+        return parent::transform($data, $option);
     }
 
-    public function build(array|object $query, array $options = []): string
+    public function build(array|object $query, ?QueryOption $option = null): string
     {
         return http_build_query(
             $query,
-            $options['numericPrefix'] ?? '',
-            $options['argSeparator'] ?? null,
-            $options['encodingType'] ?? PHP_QUERY_RFC3986
+            $option ? $option->getNumericPrefix() : '',
+            $option?->getArgSeparator(),
+            $option ? $option->getEncodingType() : PHP_QUERY_RFC3986
         );
     }
 
@@ -59,13 +61,13 @@ class Query extends StringValue
         return $result;
     }
 
-    public function append(array|string $query = [], array $options = []): static
+    public function append(array|string $query = [], ?QueryOption $option = null): static
     {
         if (!$query) {
             return $this;
         }
         if (is_array($query)) {
-            $query = $this->build($query, $options);
+            $query = $this->build($query, $option);
         }
         if (isset($this->value)) {
             $this->value .= $query ? "&{$query}" : '';
@@ -73,7 +75,7 @@ class Query extends StringValue
         return $this;
     }
 
-    public function merge(array|string $query = [], array $options = []): static
+    public function merge(array|string $query = [], ?QueryOption $option = null): static
     {
         if (!$query) {
             return $this;
@@ -82,7 +84,7 @@ class Query extends StringValue
         if (is_string($query)) {
             $newQuery = $this->parse($query) ?: [];
         }
-        $this->value = $this->build(array_merge($this->toArray(), $newQuery), $options);
+        $this->value = $this->build(array_merge($this->toArray(), $newQuery), $option);
         return $this;
     }
 

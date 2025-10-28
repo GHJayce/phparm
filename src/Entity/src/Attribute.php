@@ -23,11 +23,11 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
 
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
-     * @param array $options
+     * @param Option|null $option
      */
-    public function __construct($attributes = null, array $options = [])
+    public function __construct($attributes = null, ?Option $option = null)
     {
-        $this->fill($attributes, $options);
+        $this->fill($attributes, $option);
     }
 
     public function __call(string $methodName, array $args = []): mixed
@@ -73,20 +73,20 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
 
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
-     * @param array $options
+     * @param Option|null $option
      * @return $this
      */
-    public static function make($attributes = null, array $options = []): static
+    public static function make($attributes = null, ?Option $option = null): static
     {
-        return new static($attributes, $options);
+        return new static($attributes, $option);
     }
 
     /**
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue> $attributes
-     * @param array $options
+     * @param Option|null $option
      * @return $this
      */
-    public function fill($attributes = null, array $options = []): static
+    public function fill($attributes = null, ?Option $option = null): static
     {
         $data = $this->transform($attributes);
         $iterator = $this->getIterator();
@@ -113,7 +113,7 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
         ];
     }
 
-    protected function prefixMethodGet(string $attribute, array $args = [], array $options = []): mixed
+    protected function prefixMethodGet(string $attribute, string $methodName, array $args = [], ?Option $option = null): mixed
     {
         $iterator = $this->getIterator();
         if (!$iterator->offsetExists($attribute)) {
@@ -122,7 +122,7 @@ class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, J
         return $this->$attribute;
     }
 
-    protected function prefixMethodSet(string $attribute, array $args = [], array $options = []): static
+    protected function prefixMethodSet(string $attribute, string $methodName, array $args = [], ?Option $option = null): static
     {
         $iterator = $this->getIterator();
         if (!$iterator->offsetExists($attribute)) {

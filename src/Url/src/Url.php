@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghjayce\Phparm\Url;
 
 use Ghjayce\Phparm\Entity\Attribute;
+use Ghjayce\Phparm\Entity\Option;
 use Illuminate\Contracts\Support\Arrayable;
 use InvalidArgumentException;
 
@@ -28,11 +29,11 @@ class Url extends Attribute
 
     /**
      * @param Arrayable<TKey,TValue>|string $attributes
-     * @param array $options
+     * @param Option|null $option
      */
-    public function __construct($attributes, array $options = [])
+    public function __construct($attributes, ?Option $option = null)
     {
-        parent::__construct($attributes, $options);
+        parent::__construct($attributes, $option);
     }
 
     public function __toString(): string
@@ -52,20 +53,20 @@ class Url extends Attribute
 
     /**
      * @param array|string $attributes
-     * @param array $options
+     * @param Option|null $option
      * @return static
      */
-    public static function make($attributes = null, array $options = []): static
+    public static function make($attributes = null, ?Option $option = null): static
     {
-        return parent::make($attributes, $options);
+        return parent::make($attributes, $option);
     }
 
     /**
      * @param Arrayable<TKey,TValue>|string $attributes
-     * @param array $options
+     * @param Option|null $option
      * @return array
      */
-    protected function transform($attributes, array $options = []): array
+    protected function transform($attributes, ?Option $option = null): array
     {
         $data = $attributes;
         if (is_string($data)) {
@@ -74,7 +75,7 @@ class Url extends Attribute
                 $data['query'] = Query::make($data['query']);
             }
         }
-        return parent::transform($data, $options);
+        return parent::transform($data, $option);
     }
 
     public function base(): string

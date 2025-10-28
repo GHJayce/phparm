@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GhjayceTest\Phparm\Entity\Entity;
 
+use Ghjayce\Phparm\Entity\Option;
+
 /**
  * @method string getProtIucn()
  * @method self setProtIucn(string $iucn)
@@ -24,20 +26,20 @@ class TigerOfIucn extends Tiger
         ]);
     }
 
-    protected function prefixMethodGet(string $attribute, array $args = [], array $options = []): mixed
+    protected function prefixMethodGet(string $attribute, string $methodName, array $args = [], ?Option $option = null): mixed
     {
         if ($attribute === 'name') {
             return self::NAME_HIDE_TIPS;
         }
-        return parent::prefixMethodGet($attribute, $args, $options);
+        return parent::prefixMethodGet($attribute, $methodName, $args, $option);
     }
 
-    protected function prefixMethodGetProtect(string $attribute, array $args = [], array $options = []): mixed
+    protected function prefixMethodGetProtect(string $attribute, string $methodName, array $args = [], ?Option $option = null): mixed
     {
         return $this->$attribute ?? null;
     }
 
-    protected function prefixMethodSetProtect(string $attribute, array $args = [], array $options = []): static
+    protected function prefixMethodSetProtect(string $attribute, string $methodName, array $args = [], ?Option $option = null): static
     {
         if (isset($this->$attribute)) {
             $this->$attribute = $args[0] ?? null;
@@ -45,7 +47,7 @@ class TigerOfIucn extends Tiger
         return $this;
     }
 
-    protected function noPrefixMethod(string $attribute, array $args = [], array $options = []): string
+    protected function noPrefixMethod(string $attribute, string $methodName, array $args = [], ?Option $option = null): string
     {
         return implode('_', [__FUNCTION__, $attribute]);
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GhjayceTest\Phparm\Url;
 
+use Ghjayce\Phparm\Url\Option\QueryOption;
 use Ghjayce\Phparm\Url\Url;
 use PHPUnit\Framework\TestCase;
 
@@ -69,9 +70,7 @@ class UrlTest extends TestCase
         $url->getQuery()
             ->merge([
                 'arg' => 'hello world',
-            ], [
-                'encodingType' => PHP_QUERY_RFC3986,
-            ]);
+            ], QueryOption::make()->setEncodingType(PHP_QUERY_RFC3986));
         $this->assertSame($expect, (string)$url);
     }
 
@@ -82,9 +81,7 @@ class UrlTest extends TestCase
         $url->getQuery()
             ->merge([
                 'arg' => 'hello world',
-            ], [
-                'encodingType' => PHP_QUERY_RFC1738,
-            ]);
+            ], QueryOption::make()->setEncodingType(PHP_QUERY_RFC1738));
         $expect = 'http://username:password@hostname:9090/path?arg=hello+world#anchor';
         $this->assertSame($expect, (string)$url);
     }

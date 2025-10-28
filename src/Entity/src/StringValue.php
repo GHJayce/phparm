@@ -28,7 +28,7 @@ class StringValue extends Attribute
      * @param null|Arrayable<TKey,TValue>|Jsonable|JsonSerializable|static<TKey,TValue>|string $attributes
      * @return array<TKey,TValue>
      */
-    protected function transform($attributes, array $options = []): array
+    protected function transform($attributes, ?Option $option = null): array
     {
         $data = $attributes;
         if (is_string($data)) {
@@ -36,6 +36,6 @@ class StringValue extends Attribute
                 'value' => $attributes,
             ];
         }
-        return parent::transform($data, $options);
+        return parent::transform($data, $option);
     }
 }
