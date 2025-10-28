@@ -20,7 +20,7 @@ export default defineConfig({
   },
 
   base: env === 'prod' ? '/' + projectInfo.name : '',
-  srcDir: './src',
+  // srcDir: './src',
   title: projectInfo.name,
 
   rewrites: {
