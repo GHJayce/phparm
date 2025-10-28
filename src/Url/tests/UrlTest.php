@@ -15,7 +15,7 @@ class UrlTest extends TestCase
         $url = 'http://username:password@hostname:9090/path?arg=value#anchor';
         $swapUrl = 'https://usn:pasd@www.hostname.com/a/b?author=GHJayce#hash';
         $urlInstance = Url::make($url)
-            ->swapBase($swapUrl);
+            ->baseSwap($swapUrl);
         $this->assertSame('https://usn:pasd@www.hostname.com/path?arg=value#anchor', (string)$urlInstance);
     }
 

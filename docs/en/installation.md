@@ -1,5 +1,5 @@
 
-## Installation
+# Installation
 
 Install the full package:
 

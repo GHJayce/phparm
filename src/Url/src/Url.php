@@ -90,7 +90,7 @@ class Url extends Attribute
         ]);
     }
 
-    public function swapBase(string $swapUrl): static
+    public function baseSwap(string $swapUrl): static
     {
         $urlInfo = $this->parse($swapUrl);
         $this->scheme = $urlInfo['scheme'] ?? '';

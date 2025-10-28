@@ -17,7 +17,7 @@ use Stringable;
  * @template TKey of array-key
  * @template TValue
  */
-class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, JsonSerializable
+abstract class Attribute implements IteratorAggregate, Arrayable, Jsonable, Stringable, JsonSerializable
 {
     use PrefixMethod;
 

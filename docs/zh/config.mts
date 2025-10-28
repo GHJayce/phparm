@@ -2,7 +2,7 @@ import {defineAdditionalConfig, type DefaultTheme} from 'vitepress'
 import projectInfo from '../.vitepress/info.mjs'
 
 export default defineAdditionalConfig({
-  description: '由 Vite 和 Vue 驱动的静态站点生成器',
+  description: '代码利剑开发臂膀',
 
   themeConfig: {
     // nav: nav(),
@@ -63,6 +63,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         {text: '介绍', link: 'introduce'},
         {text: '安装', link: 'installation'}
+      ]
+    },
+    {
+      text: '武器库',
+      collapsed: false,
+      items: [
+        {text: 'Entity', link: 'package/entity'},
+        {text: 'Url', link: 'package/url'},
       ]
     }
   ]
