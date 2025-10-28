@@ -17,7 +17,7 @@ interface infoStruct {
   issueUrl: string;
 }
 
-const jsonPath: string = path.resolve(__dirname, '../public/info.json')
+const jsonPath: string = path.resolve(__dirname, '../src/public/info.json')
 const info: infoStruct = JSON.parse(fs.readFileSync(jsonPath, 'utf8'))
 
 export default info;
