@@ -7,7 +7,7 @@ hero:
   tagline: Standardized, user-friendly, and highly extensible
   actions:
     - theme: brand
-      text: 快速开始
+      text: Quick start
       link: /en/introduce
 features:
   - icon: 🚀
