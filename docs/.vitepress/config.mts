@@ -24,7 +24,7 @@ export default defineConfig({
   title: projectInfo.name,
 
   rewrites: {
-    'zh/:rest*': ':rest*'
+    // 'zh/:rest*': ':rest*'
   },
 
   lastUpdated: true,
@@ -50,24 +50,9 @@ export default defineConfig({
   },
 
   head: [
-    // [
-    //   'link',
-    //   {rel: 'icon', type: 'image/svg+xml', href: '/logo-mini.svg'}
-    // ],
-    // [
-    //   'link',
-    //   {rel: 'icon', type: 'image/png', href: '/logo-mini.png'}
-    // ],
     ['meta', {name: 'theme-color', content: '#5f67ee'}],
     ['meta', {property: 'og:type', content: 'website'}],
     ['meta', {property: 'og:site_name', content: projectInfo.nameWithAuthor}],
-    // [
-    //   'meta',
-    //   {
-    //     property: 'og:image',
-    //     content: 'https://domain.com/-og.jpg'
-    //   }
-    // ],
     ['meta', {property: 'og:url', content: projectInfo.docUrl}],
     [
       'script',
@@ -81,27 +66,18 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    // logo: {src: '/logo-mini.svg', width: 24, height: 24},
-
     socialLinks: [
       {icon: 'github', link: projectInfo.githubUrl}
     ],
 
     search: {
       provider: 'local'
-      // provider: 'algolia',
-      // options: {
-      //   appId: '8J64VVRP8K',
-      //   apiKey: '52f578a92b88ad6abde815aae2b0ad7c',
-      //   indexName: 'vitepress',
-      //   askAi: 'YaVSonfX5bS8'
-      // }
     },
   },
 
   locales: {
-    root: {label: '简体中文', lang: 'zh', dir: 'zh'},
-    en: {label: 'English', lang: 'en', dir: 'en'},
+    zh: {label: '简体中文', lang: 'zh-CN', dir: 'ltl'},
+    en: {label: 'English', lang: 'en', dir: 'ltl'},
   },
 
   transformPageData: (pageData, ctx) => {

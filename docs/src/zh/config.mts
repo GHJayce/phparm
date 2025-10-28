@@ -54,23 +54,6 @@ export default defineAdditionalConfig({
   }
 })
 
-function nav(): DefaultTheme.NavItem[] {
-  return [
-    {
-      text: '版本',
-      items: [
-        {
-          text: '1.x',
-          link: './1.x'
-        },
-        {
-          text: '更新日志',
-          link: 'https://github.com/vuejs/vitepress/blob/main/CHANGELOG.md'
-        }
-      ]
-    }
-  ]
-}
 
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
