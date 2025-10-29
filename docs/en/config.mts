@@ -63,6 +63,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {text: 'Introduce', link: 'introduce'},
         {text: 'Installation', link: 'installation'}
       ]
+    },
+    {
+      text: 'Packages',
+      collapsed: false,
+      items: [
+        {text: 'Entity', link: 'package/entity'},
+        {text: 'Url', link: 'package/url'},
+      ]
     }
   ]
 }
