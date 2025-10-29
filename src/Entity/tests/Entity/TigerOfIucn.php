@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Phparm\Entity\Entity;
+namespace GhjayceTest\PhparmEntity\Entity;
 
-use Ghjayce\Phparm\Entity\Option;
+use Ghjayce\PhparmEntity\Option;
 
 /**
  * @method string getProtIucn()

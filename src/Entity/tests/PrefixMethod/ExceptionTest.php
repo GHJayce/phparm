@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Phparm\Entity\PrefixMethod;
+namespace GhjayceTest\PhparmEntity\PrefixMethod;
 
-use GhjayceTest\Phparm\Entity\Entity\Tiger;
+use GhjayceTest\PhparmEntity\Entity\Tiger;
 use PHPUnit\Framework\TestCase;
 
 class ExceptionTest extends TestCase

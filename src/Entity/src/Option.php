@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghjayce\Phparm\Entity;
+namespace Ghjayce\PhparmEntity;
 
 class Option extends Attribute
 {

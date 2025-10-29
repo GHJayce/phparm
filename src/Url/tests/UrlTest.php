@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Phparm\Url;
+namespace GhjayceTest\PhparmUrl;
 
-use Ghjayce\Phparm\Url\Option\QueryOption;
-use Ghjayce\Phparm\Url\Query;
-use Ghjayce\Phparm\Url\Url;
+use Ghjayce\PhparmUrl\Option\QueryOption;
+use Ghjayce\PhparmUrl\Query;
+use Ghjayce\PhparmUrl\Url;
 use PHPUnit\Framework\TestCase;
 
 class UrlTest extends TestCase

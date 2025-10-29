@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Phparm\Entity\PrefixMethod;
+namespace GhjayceTest\PhparmEntity\PrefixMethod;
 
-use GhjayceTest\Phparm\Entity\Entity\Data;
-use GhjayceTest\Phparm\Entity\Entity\TigerOfIucn;
+use GhjayceTest\PhparmEntity\Entity\Data;
+use GhjayceTest\PhparmEntity\Entity\TigerOfIucn;
 use PHPUnit\Framework\TestCase;
 
 class ExtendTest extends TestCase

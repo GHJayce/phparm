@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ghjayce\\Phparm\\Url\\": "src/"
+            "Ghjayce\\PhparmUrl\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GhjayceTest\\Phparm\\Url\\": "tests/"
+            "GhjayceTest\\PhparmUrl\\": "tests/"
         }
     },
     "require-dev": {

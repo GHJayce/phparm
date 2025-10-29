@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ghjayce\\Phparm\\Entity\\": "src/"
+            "Ghjayce\\PhparmEntity\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GhjayceTest\\Phparm\\Entity\\": "tests/"
+            "GhjayceTest\\PhparmEntity\\": "tests/"
         }
     },
     "require-dev": {

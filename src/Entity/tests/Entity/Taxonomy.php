@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Phparm\Entity\Entity;
+namespace GhjayceTest\PhparmEntity\Entity;
 
-use Ghjayce\Phparm\Entity\Attribute;
+use Ghjayce\PhparmEntity\Attribute;
 
 class Taxonomy extends Attribute
 {

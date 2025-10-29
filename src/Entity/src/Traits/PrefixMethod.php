@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghjayce\Phparm\Entity\Traits;
+namespace Ghjayce\PhparmEntity\Traits;
 
-use Ghjayce\Phparm\Entity\Option;
+use Ghjayce\PhparmEntity\Option;
 
 trait PrefixMethod
 {

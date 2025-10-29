@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Phparm\Entity\Attribute;
+namespace GhjayceTest\PhparmEntity\Attribute;
 
-use GhjayceTest\Phparm\Entity\Entity\Tiger;
+use GhjayceTest\PhparmEntity\Entity\Tiger;
 use PHPUnit\Framework\TestCase;
 
 class IteratorTest extends TestCase

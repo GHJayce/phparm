@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghjayce\Phparm\Url\Option;
+namespace Ghjayce\PhparmUrl\Option;
 
-use Ghjayce\Phparm\Entity\Option;
+use Ghjayce\PhparmEntity\Option;
 
 /**
  * @method string getNumericPrefix()

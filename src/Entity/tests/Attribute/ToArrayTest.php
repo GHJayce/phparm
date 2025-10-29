@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GhjayceTest\Phparm\Entity\Attribute;
+namespace GhjayceTest\PhparmEntity\Attribute;
 
-use GhjayceTest\Phparm\Entity\Entity\Data;
-use GhjayceTest\Phparm\Entity\Entity\Tiger;
-use GhjayceTest\Phparm\Entity\Entity\Zoo;
+use GhjayceTest\PhparmEntity\Entity\Data;
+use GhjayceTest\PhparmEntity\Entity\Tiger;
+use GhjayceTest\PhparmEntity\Entity\Zoo;
 use PHPUnit\Framework\TestCase;
 
 class ToArrayTest extends TestCase

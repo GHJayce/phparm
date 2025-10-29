@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ghjayce\Phparm\Url;
+namespace Ghjayce\PhparmUrl;
 
-use Ghjayce\Phparm\Entity\Option;
-use Ghjayce\Phparm\Entity\StringValue;
-use Ghjayce\Phparm\Url\Option\QueryOption;
+use Ghjayce\PhparmEntity\Option;
+use Ghjayce\PhparmEntity\StringValue;
+use Ghjayce\PhparmUrl\Option\QueryOption;
 use Illuminate\Contracts\Support\Arrayable;
 
 use function \http_build_query, \parse_str;

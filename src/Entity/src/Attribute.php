@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ghjayce\Phparm\Entity;
+namespace Ghjayce\PhparmEntity;
 
 use ArrayIterator;
 use BadMethodCallException;
-use Ghjayce\Phparm\Entity\Traits\PrefixMethod;
+use Ghjayce\PhparmEntity\Traits\PrefixMethod;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use IteratorAggregate;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghjayce\Phparm\Url;
+namespace Ghjayce\PhparmUrl;
 
-use Ghjayce\Phparm\Entity\Attribute;
-use Ghjayce\Phparm\Entity\Option;
+use Ghjayce\PhparmEntity\Attribute;
+use Ghjayce\PhparmEntity\Option;
 use Illuminate\Contracts\Support\Arrayable;
 use InvalidArgumentException;
 
