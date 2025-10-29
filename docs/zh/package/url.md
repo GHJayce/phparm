@@ -8,7 +8,7 @@ composer require ghjayce/phparm-url
 
 ## Url
 
-`\Ghjayce\Phparm\Url\Url` 继承于 `\Ghjayce\Phparm\Entity\Attribute`
+`\Ghjayce\PhparmUrl\Url` 继承于 `\Ghjayce\PhparmEntity\Attribute`
 
 ### 概念
 
@@ -37,7 +37,7 @@ composer require ghjayce/phparm-url
 ```php
 <?php
 
-use Ghjayce\Phparm\Url\Url;
+use Ghjayce\PhparmUrl\Url;
 
 $url = 'http://username:password@hostname:9090/path?arg=value#anchor';
 $instance = Url::make($url);
@@ -50,7 +50,7 @@ echo $instance->baseSwap('https://newhost:8080/abc');
 
 ## Query
 
-`\Ghjayce\Phparm\Url\Url` 继承于 `\Ghjayce\Phparm\Entity\StringValue`
+`\Ghjayce\PhparmUrl\Url` 继承于 `\Ghjayce\PhparmEntity\StringValue`
 
 ### 方法
 
@@ -66,7 +66,7 @@ echo $instance->baseSwap('https://newhost:8080/abc');
 ```php
 <?php
 
-use Ghjayce\Phparm\Url\Query;
+use Ghjayce\PhparmUrl\Query;
 
 $instance = Query::make('a=b&c=d')
     ->append('?e=f&a=aa');

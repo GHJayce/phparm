@@ -9,7 +9,7 @@ composer require ghjayce/phparm-entity
 
 ## Attribute
 
-`\Ghjayce\Phparm\Entity\Attribute`
+`\Ghjayce\PhparmEntity\Attribute`
 
 An abstract class used to define entity attributes.
 
@@ -44,7 +44,7 @@ Here are some example classes about animals:
 ```php
 <?php
 
-use Ghjayce\Phparm\Entity\Attribute;
+use Ghjayce\PhparmEntity\Attribute;
 
 class Taxonomy extends Attribute
 {
@@ -172,7 +172,7 @@ $serializableData = $tiger->jsonSerialize();
 
 ## Option
 
-If you have some optional parameters, you can use the `\Ghjayce\Phparm\Entity\Option` class.
+If you have some optional parameters, you can use the `\Ghjayce\PhparmEntity\Option` class.
 
 This is clearer than using an array.
 
@@ -180,7 +180,7 @@ This is clearer than using an array.
 
 ### PrefixMethod Hook
 
-`\Ghjayce\Phparm\Entity\Traits\PrefixMethod::class`
+`\Ghjayce\PhparmEntity\Traits\PrefixMethod::class`
 
 A trait where `prefixMethod()` calls the corresponding method according to the prefix configuration.
 
@@ -192,7 +192,7 @@ Rule:
 
 > The empty prefix `''` is also supported.
 
-For example, in `\Ghjayce\Phparm\Entity\Attribute`, two hooks are built-in:
+For example, in `\Ghjayce\PhparmEntity\Attribute`, two hooks are built-in:
 
 ```php
 protected function prefixMethodMap(): array
@@ -210,6 +210,6 @@ When calling `$instance->getName()`, it accesses the public attribute `public st
 
 ### StringValue
 
-If your entity only has a single string attribute, you can use the `\Ghjayce\Phparm\Entity\StringValue` class.
+If your entity only has a single string attribute, you can use the `\Ghjayce\PhparmEntity\StringValue` class.
 
 See details in [Url](./url.md)

@@ -8,7 +8,7 @@ composer require ghjayce/phparm-entity
 
 ## Attribute
 
-`\Ghjayce\Phparm\Entity\Attribute`
+`\Ghjayce\PhparmEntity\Attribute`
 
 用于定义实体属性的抽象类。
 
@@ -43,7 +43,7 @@ composer require ghjayce/phparm-entity
 ```php
 <?php
 
-use Ghjayce\Phparm\Entity\Attribute;
+use Ghjayce\PhparmEntity\Attribute;
 
 class Taxonomy extends Attribute
 {
@@ -171,7 +171,7 @@ $serializableData = $tiger->jsonSerialize();
 
 ## Option
 
-如果你有一些可选项参数时，可以使用 `\Ghjayce\Phparm\Entity\Option` 类。
+如果你有一些可选项参数时，可以使用 `\Ghjayce\PhparmEntity\Option` 类。
 
 这比使用数组来说更加清晰。
 
@@ -179,7 +179,7 @@ $serializableData = $tiger->jsonSerialize();
 
 ### PrefixMethod 钩子
 
-`\Ghjayce\Phparm\Entity\Traits\PrefixMethod::class`
+`\Ghjayce\PhparmEntity\Traits\PrefixMethod::class`
 
 是一个 trait，`prefixMethod()` 根据钩子配置，按照前缀调用对应的方法。
 
@@ -191,7 +191,7 @@ $serializableData = $tiger->jsonSerialize();
 
 > `''`空前缀也是支持的。
 
-以 `\Ghjayce\Phparm\Entity\Attribute` 为例，它内置了两个钩子：
+以 `\Ghjayce\PhparmEntity\Attribute` 为例，它内置了两个钩子：
 
 ```php
 protected function prefixMethodMap(): array
@@ -209,6 +209,6 @@ protected function prefixMethodMap(): array
 
 ### StringValue
 
-如果你的实体仅有一个字符串属性时，可以使用 `\Ghjayce\Phparm\Entity\StringValue` 类。
+如果你的实体仅有一个字符串属性时，可以使用 `\Ghjayce\PhparmEntity\StringValue` 类。
 
 详细参考 [Url](./url.md)
