@@ -9,6 +9,8 @@ use Ghjayce\Phparm\Entity\Option;
 use Illuminate\Contracts\Support\Arrayable;
 use InvalidArgumentException;
 
+use function \parse_url;
+
 /**
  * @template TKey of array-key
  * @template TValue
@@ -74,6 +76,10 @@ class Url extends Attribute
             if (isset($data['query'])) {
                 $data['query'] = Query::make($data['query']);
             }
+        } elseif (is_array($data)) {
+            if (isset($data['query'])) {
+                $data['query'] = Query::make($data['query']);
+            }
         }
         return parent::transform($data, $option);
     }
@@ -101,7 +107,7 @@ class Url extends Attribute
         return $this;
     }
 
-    protected function parse(string $url): array
+    public function parse(string $url): array
     {
         if (!str_starts_with($url, 'http')) {
             throw new InvalidArgumentException('Invalid url');

@@ -8,6 +8,11 @@ use Ghjayce\Phparm\Entity\Option;
 
 trait PrefixMethod
 {
+    protected function prefixMethodMap(): array
+    {
+        return [];
+    }
+
     protected function prefixMethod(string $methodName, array $args = [], int $offset = 0, ?Option $option = null): ?array
     {
         $map = array_reverse($this->prefixMethodMap());

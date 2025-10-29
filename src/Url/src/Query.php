@@ -9,6 +9,8 @@ use Ghjayce\Phparm\Entity\StringValue;
 use Ghjayce\Phparm\Url\Option\QueryOption;
 use Illuminate\Contracts\Support\Arrayable;
 
+use function \http_build_query, \parse_str;
+
 /**
  * @template TKey of array-key
  * @template TValue
@@ -30,6 +32,8 @@ class Query extends StringValue
             $data = [
                 'value' => $this->build($attributes, $option),
             ];
+        } elseif (is_string($data)) {
+            $data = $this->purge($data);
         }
         return parent::transform($data, $option);
     }
@@ -44,16 +48,25 @@ class Query extends StringValue
         );
     }
 
-    public function parse(?string $query = null): ?array
+    protected function purge(?string $query = null): string
     {
-        $needle = $query;
         if (is_null($query)) {
-            $needle = $this->value;
+            return '';
         }
-        if (is_null($needle)) {
-            return null;
+        $query = trim($query);
+        if (str_starts_with($query, '?')) {
+            $query = substr($query, 1);
+            if (strrpos($query, '#') !== false) {
+                $query = strstr($query, '#', true);
+            }
         }
-        if (!trim($needle)) {
+        return $query;
+    }
+
+    public function parse(?string $query = null): array
+    {
+        $needle = $this->purge($query);
+        if (!$needle) {
             return [];
         }
         $result = [];
@@ -68,6 +81,8 @@ class Query extends StringValue
         }
         if (is_array($query)) {
             $query = $this->build($query, $option);
+        } elseif (is_string($query)) {
+            $query = $this->purge($query);
         }
         if (isset($this->value)) {
             $this->value .= $query ? "&{$query}" : '';
@@ -82,7 +97,7 @@ class Query extends StringValue
         }
         $newQuery = $query;
         if (is_string($query)) {
-            $newQuery = $this->parse($query) ?: [];
+            $newQuery = $this->parse($query);
         }
         $this->value = $this->build(array_merge($this->toArray(), $newQuery), $option);
         return $this;

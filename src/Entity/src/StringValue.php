@@ -17,7 +17,7 @@ use JsonSerializable;
  */
 class StringValue extends Attribute
 {
-    public string $value;
+    public string $value = '';
 
     public function __toString(): string
     {
